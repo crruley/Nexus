@@ -1,0 +1,25 @@
+plugins {
+    id 'java'
+}
+
+group = 'io.github.crruley'
+version = '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+def lwjglVersion = "3.3.6"
+
+dependencies {
+    implementation platform("org.lwjgl:lwjgl-bom:$lwjglVersion")
+
+    implementation "org.lwjgl:lwjgl"
+    implementation "org.lwjgl:lwjgl-glfw"
+    implementation "org.lwjgl:lwjgl-opengl"
+
+    runtimeOnly "org.lwjgl:lwjgl::natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-glfw::natives-windows"
+    runtimeOnly "org.lwjgl:lwjgl-opengl::natives-windows"
+
+}
