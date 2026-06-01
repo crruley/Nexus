@@ -1,12 +1,12 @@
 package io.github.crruley.nexus.core;
 
-import com.link.event.Bus;
+import io.github.crruley.signal.core.Bus;
 import io.github.crruley.nexus.input.Input;
 import io.github.crruley.nexus.event.*;
 import org.lwjgl.glfw.GLFWVidMode;
 import java.nio.IntBuffer;
 
-import static com.link.event.Priority.*;
+import static io.github.crruley.signal.core.Priority.*;
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.opengl.GL.*;

@@ -1,10 +1,11 @@
 package io.github.crruley.nexus.core;
 
-import com.link.event.Bus;
-import com.link.event.Subscribe;
+import io.github.crruley.signal.core.Bus;
+import io.github.crruley.signal.core.Subscribe;
 import io.github.crruley.nexus.event.WindowCloseEvent;
 import io.github.crruley.nexus.event.WindowResizeEvent;
 import io.github.crruley.nexus.event.WindowMinimizeEvent;
+
 import static io.github.crruley.nexus.utility.Time.getCurrentTimeSeconds;
 import static io.github.crruley.nexus.utility.Time.sync;
 import static org.lwjgl.glfw.GLFW.*;

@@ -1,6 +1,6 @@
 package io.github.crruley.nexus.event;
 
-import com.link.event.Event;
+import io.github.crruley.signal.core.Event;
 import io.github.crruley.nexus.core.Window;
 
 /**

@@ -1,6 +1,6 @@
 package io.github.crruley.nexus.memory;
 
-import static nexus.utility.Memory.*;
+import static io.github.crruley.nexus.utility.Memory.*;
 import static org.lwjgl.opengl.GL15.*;
 
 /**
