@@ -19,12 +19,12 @@ public abstract class Application {
     /**
      * The main {@code Bus} for the {@code Application}.
      */
-    private Bus bus;
+    private final Bus bus;
 
     /**
      * The main {@code Window} for the {@code Application}.
      */
-    private Window window;
+    private final Window window;
 
     /**
      * Whether the {@code Application} is running.
