@@ -213,21 +213,42 @@ public abstract class Application {
         }
     }
 
+    /**
+     * Listens for a {@code SettingsChangeTitleEvent} and updates the {@code Window}.
+     *
+     * @param event the event listed for.
+     */
     @Subscribe
     private void onEvent(SettingsChangeTitleEvent event) {
         window.setTitle(event.getTitle());
     }
 
+    /**
+     * Listens for a {@code SettingsChangeWidthEvent} and updates the {@code Window}.
+     *
+     * @param event the event listed for.
+     */
     @Subscribe
     private void onEvent(SettingsChangeWidthEvent event) {
         window.setWidth(event.getWidth());
     }
 
+    /**
+     * Listens for a {@code SettingsChangeHeightEvent} and updates the {@code Window}.
+     *
+     * @param event the event listed for.
+     */
     @Subscribe
     private void onEvent(SettingsChangeHeightEvent event) {
         window.setHeight(event.getHeight());
     }
 
+    /**
+     * Listens for a {@code SettingsChangeVSyncEvent} and updates the {@code Application} vertical synchronization
+     * state.
+     *
+     * @param event the event listed for.
+     */
     @Subscribe
     private void onEvent(SettingsChangeVSyncEvent event) {
         glfwSwapInterval(event.getVSync() ? 1 : 0);
