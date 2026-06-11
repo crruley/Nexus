@@ -1,10 +1,14 @@
 package io.github.crruley.nexus.core;
 
+import io.github.crruley.nexus.event.SettingsChangeHeightEvent;
+import io.github.crruley.nexus.event.SettingsChangeTitleEvent;
+import io.github.crruley.nexus.event.SettingsChangeVSyncEvent;
+import io.github.crruley.nexus.event.SettingsChangeWidthEvent;
+import io.github.crruley.nexus.event.WindowCloseEvent;
+import io.github.crruley.nexus.event.WindowMinimizeEvent;
+import io.github.crruley.nexus.event.WindowResizeEvent;
 import io.github.crruley.signal.core.Bus;
 import io.github.crruley.signal.core.Subscribe;
-import io.github.crruley.nexus.event.WindowCloseEvent;
-import io.github.crruley.nexus.event.WindowResizeEvent;
-import io.github.crruley.nexus.event.WindowMinimizeEvent;
 
 import static io.github.crruley.nexus.utility.Time.getCurrentTimeSeconds;
 import static io.github.crruley.nexus.utility.Time.sync;
@@ -19,12 +23,17 @@ public abstract class Application {
     /**
      * The main {@code Bus} for the {@code Application}.
      */
-    private final Bus bus;
+    protected final Bus bus;
+
+    /**
+     * The {@code Settings} for the {@code Application}.
+     */
+    protected final Settings settings;
 
     /**
      * The main {@code Window} for the {@code Application}.
      */
-    private final Window window;
+    protected final Window window;
 
     /**
      * Whether the {@code Application} is running.
@@ -35,11 +44,6 @@ public abstract class Application {
      * Whether the {@code Application} is minimized.
      */
     private boolean minimized;
-
-    /**
-     * Whether vertical synchronization is enabled.
-     */
-    private boolean vsync;
 
     /**
      * The updates-per-second.
@@ -56,7 +60,12 @@ public abstract class Application {
      */
     protected Application() {
         bus = new Bus();
-        window = new Window(bus);
+        settings = new Settings(bus);
+        window = new Window(bus, settings.getTitle(), settings.getWidth(), settings.getHeight());
+    }
+
+    public final Settings getSettings() {
+        return settings;
     }
 
     public final Bus getBus() {
@@ -73,10 +82,6 @@ public abstract class Application {
 
     public final boolean isMinimized() {
         return minimized;
-    }
-
-    public final boolean isVsync() {
-        return vsync;
     }
 
     public final int getUPS() {
@@ -154,7 +159,6 @@ public abstract class Application {
             }
 
             final double maxFrameTime = 0.25D;
-            final double updateInterval = 1.0D / 60.0D; // TODO Add functionality for changing this value
             double previousTime = getCurrentTimeSeconds();
             double accumulator = 0.0D;
             double counter = 0.0D;
@@ -164,6 +168,7 @@ public abstract class Application {
             while (running) {
                 glfwPollEvents();
 
+                double updateInterval = 1.0D / settings.getTargetUPS();
                 double currentTime = getCurrentTimeSeconds();
                 double elapsedTime = currentTime - previousTime;
 
@@ -195,8 +200,9 @@ public abstract class Application {
 
                     fpsCounter++;
                 }
-                if (!vsync) {
-                    sync(120); // TODO Add ability to change this during runtime.
+
+                if (!settings.getVSync()) {
+                    sync(settings.getTargetFPS());
                 }
             }
         } finally {
@@ -205,6 +211,26 @@ public abstract class Application {
             glfwTerminate();
             bus.unregister(this);
         }
+    }
+
+    @Subscribe
+    private void onEvent(SettingsChangeTitleEvent event) {
+        window.setTitle(event.getTitle());
+    }
+
+    @Subscribe
+    private void onEvent(SettingsChangeWidthEvent event) {
+        window.setWidth(event.getWidth());
+    }
+
+    @Subscribe
+    private void onEvent(SettingsChangeHeightEvent event) {
+        window.setHeight(event.getHeight());
+    }
+
+    @Subscribe
+    private void onEvent(SettingsChangeVSyncEvent event) {
+        glfwSwapInterval(event.getVSync() ? 1 : 0);
     }
 
     /**

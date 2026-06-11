@@ -68,15 +68,6 @@ public class Window {
     /**
      * Constructs a {@code Window}.
      *
-     * @param bus the {@code Bus}.
-     */
-    public Window(Bus bus) {
-        this(bus, "", 960, 540);
-    }
-
-    /**
-     * Constructs a {@code Window}.
-     *
      * @param bus    the {@code Bus}.
      * @param title  the title.
      * @param width  the width (in pixels).
@@ -302,8 +293,8 @@ public class Window {
             return;
         }
 
-        glfwDestroyWindow(handle);
         glfwFreeCallbacks(handle);
+        glfwDestroyWindow(handle);
         bus.publish(new WindowDestroyEvent(this), NORMAL);
     }
 
