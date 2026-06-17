@@ -35,9 +35,7 @@ public class Vector3 extends Vector {
      * @param other the {@code Vector3} to copy from.
      */
     public Vector3(Vector3 other) {
-        x = other.x;
-        y = other.y;
-        z = other.z;
+       setCopy(other);
     }
 
     /**
@@ -79,6 +77,14 @@ public class Vector3 extends Vector {
         x = 0.0F;
         y = 0.0F;
         z = 0.0F;
+
+        return this;
+    }
+
+    public Vector3 setCopy(Vector3 other) {
+        x = other.x;
+        y = other.y;
+        z = other.z;
 
         return this;
     }

@@ -10,6 +10,7 @@ import io.github.crruley.nexus.model.Texture;
 import io.github.crruley.nexus.scene.Camera;
 import io.github.crruley.nexus.scene.Entity;
 import io.github.crruley.nexus.scene.Light;
+import io.github.crruley.nexus.scene.Transform;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL13.*;
@@ -53,23 +54,30 @@ public class Renderer {
     // TODO Fix over-allocation of Vector3 and Matrix4
     public static void draw(Window window, ShaderProgram shaderProgram, Camera camera, Entity entity, Light light,
                             float interpolation) {
+        Transform cameraTransform = camera.getTransform();
+        Transform entityTransform = entity.getTransform();
         Vector3 interpolatedCameraPosition = new Vector3();
         Vector3 interpolatedCameraRotation = new Vector3();
         Vector3 interpolatedEntityPosition = new Vector3();
         Vector3 interpolatedEntityRotation = new Vector3();
 
-        Vector3.lerp(interpolation, camera.getPreviousPosition(), camera.getPosition(), interpolatedCameraPosition);
-        Vector3.lerp(interpolation, camera.getPreviousRotation(), camera.getRotation(), interpolatedCameraRotation);
-        Vector3.lerp(interpolation, entity.getPreviousPosition(), entity.getPosition(), interpolatedEntityPosition);
-        Vector3.lerp(interpolation, entity.getPreviousRotation(), entity.getRotation(), interpolatedEntityRotation);
+        Vector3.lerp(interpolation, cameraTransform.getPreviousPosition(), cameraTransform.getPosition(),
+                interpolatedCameraPosition);
+        Vector3.lerp(interpolation, cameraTransform.getPreviousRotation(), cameraTransform.getRotation(),
+                interpolatedCameraRotation);
+        Vector3.lerp(interpolation, entityTransform.getPreviousPosition(), entityTransform.getPosition(),
+                interpolatedEntityPosition);
+        Vector3.lerp(interpolation, entityTransform.getPreviousRotation(), entityTransform.getRotation(),
+                interpolatedEntityRotation);
 
         Matrix4 transformation = new Matrix4();
         Matrix4 view = new Matrix4();
         Matrix4 projection = new Matrix4();
 
-        transformation.setTransformation(interpolatedEntityPosition, interpolatedEntityRotation, entity.getScale());
+        transformation.setTransformation(interpolatedEntityPosition, interpolatedEntityRotation,
+                entityTransform.getScale());
         view.setView(interpolatedCameraPosition, interpolatedCameraRotation);
-        projection.setPerspectiveProjection(window.getWidth(), window.getHeight(), 90.0F, 0.1F, 1000.0F);
+        projection.setPerspectiveProjection(window.getWidth(), window.getHeight(), 90.0F, 0.1F,1000.0F);
 
         shaderProgram.bind();
         shaderProgram.uploadUniform("transformation", transformation);
@@ -111,10 +119,11 @@ public class Renderer {
     }
 
     public static void drawPoints(Window window, ShaderProgram shaderProgram, Camera camera, Model model) {
+        Transform cameraTransform = camera.getTransform();
         Matrix4 view = new Matrix4();
         Matrix4 projection = new Matrix4();
 
-        view.setView(camera.getPosition(), camera.getRotation());
+        view.setView(cameraTransform.getPosition(), cameraTransform.getRotation());
         projection.setPerspectiveProjection(window.getWidth(), window.getHeight(), 90.0F, 0.1F, 1000.0F);
 
         shaderProgram.bind();

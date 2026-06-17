@@ -1,73 +1,31 @@
 package io.github.crruley.nexus.scene;
 
-import io.github.crruley.nexus.math.Vector3;
 import io.github.crruley.nexus.model.Model;
 
 public class Entity {
 
     private Model model;
-    private Vector3 position;
-    private Vector3 rotation;
-    private Vector3 scale;
-    private Vector3 previousPosition;
-    private Vector3 previousRotation;
+    private Transform transform;
 
-    public Entity(Model model, Vector3 position, Vector3 rotation, Vector3 scale) {
+    public Entity(Model model, Transform transform) {
         this.model = model;
-        this.position = position;
-        this.rotation = rotation;
-        this.scale = scale;
-        previousPosition = new Vector3(position);
-        previousRotation = new Vector3(rotation);
+        this.transform = transform;
     }
 
     public Model getModel() {
         return model;
     }
 
-    public Vector3 getPosition() {
-        return position;
-    }
-
-    public Vector3 getRotation() {
-        return rotation;
-    }
-
-    public Vector3 getScale() {
-        return scale;
+    public Transform getTransform() {
+        return transform;
     }
 
     public void setModel(Model model) {
         this.model = model;
     }
 
-    public void setPosition(Vector3 position) {
-        this.position = position;
-    }
-
-    public void setRotation(Vector3 rotation) {
-        this.rotation = rotation;
-    }
-
-    public void setScale(Vector3 scale) {
-        this.scale = scale;
-    }
-
-    public Vector3 getPreviousPosition() {
-        return previousPosition;
-    }
-
-    public Vector3 getPreviousRotation() {
-        return previousRotation;
-    }
-
     public void update() {
-       previousPosition.x = position.x;
-       previousPosition.y = position.y;
-       previousPosition.z = position.z;
-       previousRotation.x = rotation.x;
-       previousRotation.y = rotation.y;
-       previousRotation.z = rotation.z;
+        transform.update();
     }
 
     public void delete() {
