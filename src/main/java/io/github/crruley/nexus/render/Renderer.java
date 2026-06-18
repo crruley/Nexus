@@ -118,12 +118,23 @@ public class Renderer {
         shaderProgram.unbind();
     }
 
-    public static void drawPoints(Window window, ShaderProgram shaderProgram, Camera camera, Model model) {
+    public static void drawPoints(Window window, ShaderProgram shaderProgram,
+                                  Camera camera, Model model, float interpolation) {
         Transform cameraTransform = camera.getTransform();
+
+        Vector3 interpolatedCameraPosition = new Vector3();
+        Vector3 interpolatedCameraRotation = new Vector3();
+
+        Vector3.lerp(interpolation, cameraTransform.getPreviousPosition(),
+                cameraTransform.getPosition(), interpolatedCameraPosition);
+
+        Vector3.lerp(interpolation, cameraTransform.getPreviousRotation(),
+                cameraTransform.getRotation(), interpolatedCameraRotation);
+
         Matrix4 view = new Matrix4();
         Matrix4 projection = new Matrix4();
 
-        view.setView(cameraTransform.getPosition(), cameraTransform.getRotation());
+        view.setView(interpolatedCameraPosition, interpolatedCameraRotation);
         projection.setPerspectiveProjection(window.getWidth(), window.getHeight(), 90.0F, 0.1F, 1000.0F);
 
         shaderProgram.bind();

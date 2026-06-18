@@ -99,8 +99,10 @@ public abstract class Application {
 
     /**
      * The user-implemented method for the updating stage.
+     *
+     * @param delta the fixed delta time determined by the updates-per-second.
      */
-    protected abstract void onUpdate();
+    protected abstract void onUpdate(double delta);
 
     /**
      * The user-implemented method for the rendering stage.
@@ -181,7 +183,7 @@ public abstract class Application {
                 counter += elapsedTime;
 
                 while (accumulator >= updateInterval) {
-                    onUpdate();
+                    onUpdate(updateInterval);
 
                     upsCounter++;
                     accumulator -= updateInterval;
