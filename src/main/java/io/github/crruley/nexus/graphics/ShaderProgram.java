@@ -1,4 +1,4 @@
-package io.github.crruley.nexus.render;
+package io.github.crruley.nexus.graphics;
 
 import io.github.crruley.nexus.math.Matrix2;
 import io.github.crruley.nexus.math.Matrix3;
@@ -124,11 +124,11 @@ public class ShaderProgram {
         boolean fragment = false;
 
         for (var shader : shaders) {
-            PipelineStage pipelineStage = shader.getPipelineStage();
+            ShaderPipelineStage shaderPipelineStage = shader.getPipelineStage();
 
-            if (pipelineStage == PipelineStage.VERTEX) {
+            if (shaderPipelineStage == ShaderPipelineStage.VERTEX) {
                 vertex = true;
-            } else if (pipelineStage == PipelineStage.FRAGMENT) {
+            } else if (shaderPipelineStage == ShaderPipelineStage.FRAGMENT) {
                 fragment = true;
             }
         }
@@ -154,12 +154,12 @@ public class ShaderProgram {
             String source = concatenate(group);
 
             switch (firstLine) {
-                case "#type vertex"     -> shaders.add(new Shader(PipelineStage.VERTEX, source));
-                case "#type geometry"   -> shaders.add(new Shader(PipelineStage.GEOMETRY, source));
-                case "#type control"    -> shaders.add(new Shader(PipelineStage.CONTROL, source));
-                case "#type evaluation" -> shaders.add(new Shader(PipelineStage.EVALUATION, source));
-                case "#type fragment"   -> shaders.add(new Shader(PipelineStage.FRAGMENT, source));
-                case "#type compute"    -> shaders.add(new Shader(PipelineStage.COMPUTE, source));
+                case "#type vertex"     -> shaders.add(new Shader(ShaderPipelineStage.VERTEX, source));
+                case "#type geometry"   -> shaders.add(new Shader(ShaderPipelineStage.GEOMETRY, source));
+                case "#type control"    -> shaders.add(new Shader(ShaderPipelineStage.CONTROL, source));
+                case "#type evaluation" -> shaders.add(new Shader(ShaderPipelineStage.EVALUATION, source));
+                case "#type fragment"   -> shaders.add(new Shader(ShaderPipelineStage.FRAGMENT, source));
+                case "#type compute"    -> shaders.add(new Shader(ShaderPipelineStage.COMPUTE, source));
             }
         }
 

@@ -1,4 +1,4 @@
-package io.github.crruley.nexus.memory;
+package io.github.crruley.nexus.graphics;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -7,7 +7,7 @@ import static org.lwjgl.opengl.GL11.*;
  *
  * @author Christopher Ruley
  */
-public enum DataType {
+public enum ShaderDataType {
 
     INT(1, 4),
     INT2(2, 8),
@@ -34,7 +34,7 @@ public enum DataType {
      * @param componentCount the number of components.
      * @param size           the size (in bytes), or the product of the component count and the corresponding bytes.
      */
-    DataType(int componentCount, int size) {
+    ShaderDataType(int componentCount, int size) {
         this.componentCount = componentCount;
         this.size = size;
     }

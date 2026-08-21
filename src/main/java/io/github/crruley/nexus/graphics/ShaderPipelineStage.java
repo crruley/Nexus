@@ -1,4 +1,4 @@
-package io.github.crruley.nexus.render;
+package io.github.crruley.nexus.graphics;
 
 import static org.lwjgl.opengl.GL43.*;
 
@@ -7,7 +7,7 @@ import static org.lwjgl.opengl.GL43.*;
  *
  * @author Christopher Ruley
  */
-public enum PipelineStage {
+public enum ShaderPipelineStage {
 
     VERTEX,
     GEOMETRY,

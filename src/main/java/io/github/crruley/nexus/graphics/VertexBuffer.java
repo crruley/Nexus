@@ -1,4 +1,4 @@
-package io.github.crruley.nexus.memory;
+package io.github.crruley.nexus.graphics;
 
 import io.github.crruley.nexus.math.Vector;
 

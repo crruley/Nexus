@@ -1,4 +1,4 @@
-package io.github.crruley.nexus.render;
+package io.github.crruley.nexus.graphics;
 
 import static org.lwjgl.opengl.GL11.*;
 import static org.lwjgl.opengl.GL20.*;
@@ -13,7 +13,7 @@ public class Shader {
     /**
      * The {@code PipelineStage}.
      */
-    private PipelineStage pipelineStage;
+    private ShaderPipelineStage shaderPipelineStage;
 
     /**
      * The source code.
@@ -28,13 +28,13 @@ public class Shader {
     /**
      * Constructs a {@code Shader}.
      *
-     * @param pipelineStage the {@code PipelineStage}.
+     * @param shaderPipelineStage the {@code PipelineStage}.
      * @param sourceCode    the source code.
      */
-    public Shader(PipelineStage pipelineStage, String sourceCode) {
-        this.pipelineStage = pipelineStage;
+    public Shader(ShaderPipelineStage shaderPipelineStage, String sourceCode) {
+        this.shaderPipelineStage = shaderPipelineStage;
         this.sourceCode = sourceCode;
-        handle = glCreateShader(pipelineStage.getOpenGLType());
+        handle = glCreateShader(shaderPipelineStage.getOpenGLType());
 
         glShaderSource(handle, sourceCode);
         glCompileShader(handle);
@@ -51,8 +51,8 @@ public class Shader {
     /**
      * Gets the {@code PipelineStage}.
      */
-    public PipelineStage getPipelineStage() {
-        return pipelineStage;
+    public ShaderPipelineStage getPipelineStage() {
+        return shaderPipelineStage;
     }
 
     /**

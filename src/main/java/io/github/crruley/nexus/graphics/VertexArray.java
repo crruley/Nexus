@@ -1,4 +1,4 @@
-package io.github.crruley.nexus.memory;
+package io.github.crruley.nexus.graphics;
 
 import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
@@ -45,10 +45,10 @@ public class VertexArray {
             vertexBuffer.bind();
 
             for (var vertexElement : vertexElements) {
-                DataType dataType = vertexElement.getDataType();
+                ShaderDataType shaderDataType = vertexElement.getDataType();
 
                 glEnableVertexAttribArray(index);
-                glVertexAttribPointer(index, dataType.getComponentCount(), dataType.getOpenGLType(),
+                glVertexAttribPointer(index, shaderDataType.getComponentCount(), shaderDataType.getOpenGLType(),
                     vertexElement.isNormalized(), vertexLayout.getStride(), vertexElement.getOffset());
 
                 index++;

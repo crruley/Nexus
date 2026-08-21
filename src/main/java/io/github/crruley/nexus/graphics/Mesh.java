@@ -1,4 +1,4 @@
-package io.github.crruley.nexus.model;
+package io.github.crruley.nexus.graphics;
 
 /**
  * @author Christopher Ruley

@@ -202,7 +202,6 @@ public abstract class Application {
 
                     fpsCounter++;
                 }
-
                 if (!settings.getVSync()) {
                     sync(settings.getTargetFPS());
                 }

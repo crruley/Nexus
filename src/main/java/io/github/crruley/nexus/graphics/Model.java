@@ -1,6 +1,4 @@
-package io.github.crruley.nexus.model;
-
-import io.github.crruley.nexus.memory.VertexArray;
+package io.github.crruley.nexus.graphics;
 
 public class Model {
 

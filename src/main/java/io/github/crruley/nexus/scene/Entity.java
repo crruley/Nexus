@@ -1,6 +1,6 @@
 package io.github.crruley.nexus.scene;
 
-import io.github.crruley.nexus.model.Model;
+import io.github.crruley.nexus.graphics.Model;
 
 public class Entity {
 

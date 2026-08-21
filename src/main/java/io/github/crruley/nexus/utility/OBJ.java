@@ -1,14 +1,18 @@
 package io.github.crruley.nexus.utility;
 
+import io.github.crruley.nexus.graphics.IndexBuffer;
+import io.github.crruley.nexus.graphics.Material;
+import io.github.crruley.nexus.graphics.Mesh;
+import io.github.crruley.nexus.graphics.Model;
+import io.github.crruley.nexus.graphics.ShaderDataType;
+import io.github.crruley.nexus.graphics.VertexArray;
+import io.github.crruley.nexus.graphics.VertexBuffer;
+import io.github.crruley.nexus.graphics.VertexElement;
+import io.github.crruley.nexus.graphics.VertexLayout;
 import io.github.crruley.nexus.math.Vector;
 import io.github.crruley.nexus.math.Vector2;
 import io.github.crruley.nexus.math.Vector3;
 import io.github.crruley.nexus.math.Vector4;
-import io.github.crruley.nexus.model.Material;
-import io.github.crruley.nexus.model.Mesh;
-import io.github.crruley.nexus.model.Model;
-import io.github.crruley.nexus.memory.*;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -185,13 +189,13 @@ public class OBJ {
 
         // Build layout + buffers + model, same as before
         List<VertexElement> vertexElements = new ArrayList<>();
-        vertexElements.add(new VertexElement("position", DataType.FLOAT3, false));
+        vertexElements.add(new VertexElement("position", ShaderDataType.FLOAT3, false));
 
         if (hasTexcoords) {
-            vertexElements.add(new VertexElement("texcoord", DataType.FLOAT2, false));
+            vertexElements.add(new VertexElement("texcoord", ShaderDataType.FLOAT2, false));
         }
         if (hasNormals) {
-            vertexElements.add(new VertexElement("normal", DataType.FLOAT3, false));
+            vertexElements.add(new VertexElement("normal", ShaderDataType.FLOAT3, false));
         }
 
         VertexLayout layout       = new VertexLayout(vertexElements.toArray(new VertexElement[0]));

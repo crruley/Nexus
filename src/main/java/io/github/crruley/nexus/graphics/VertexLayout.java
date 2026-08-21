@@ -1,4 +1,4 @@
-package io.github.crruley.nexus.memory;
+package io.github.crruley.nexus.graphics;
 
 /**
  * A {@code VertexLayout} stores one or more {@code VertexElement}s to provide an interpretation of vertex data stored

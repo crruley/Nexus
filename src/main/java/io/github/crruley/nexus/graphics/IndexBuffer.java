@@ -1,4 +1,4 @@
-package io.github.crruley.nexus.memory;
+package io.github.crruley.nexus.graphics;
 
 import static io.github.crruley.nexus.utility.Memory.*;
 import static org.lwjgl.opengl.GL15.*;

@@ -1,12 +1,9 @@
-package io.github.crruley.nexus.render;
+package io.github.crruley.nexus.graphics;
 
 import io.github.crruley.nexus.core.Window;
 import io.github.crruley.nexus.math.Matrix4;
 import io.github.crruley.nexus.math.Vector3;
 import io.github.crruley.nexus.math.Vector4;
-import io.github.crruley.nexus.model.Material;
-import io.github.crruley.nexus.model.Model;
-import io.github.crruley.nexus.model.Texture;
 import io.github.crruley.nexus.scene.Camera;
 import io.github.crruley.nexus.scene.Entity;
 import io.github.crruley.nexus.scene.Light;

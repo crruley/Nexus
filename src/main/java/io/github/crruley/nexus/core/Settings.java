@@ -1,6 +1,11 @@
 package io.github.crruley.nexus.core;
 
-import io.github.crruley.nexus.event.*;
+import io.github.crruley.nexus.event.SettingsChangeHeightEvent;
+import io.github.crruley.nexus.event.SettingsChangeTargetFPSEvent;
+import io.github.crruley.nexus.event.SettingsChangeTargetUPSEvent;
+import io.github.crruley.nexus.event.SettingsChangeTitleEvent;
+import io.github.crruley.nexus.event.SettingsChangeVSyncEvent;
+import io.github.crruley.nexus.event.SettingsChangeWidthEvent;
 import io.github.crruley.signal.core.Bus;
 
 import static io.github.crruley.signal.core.Priority.*;
@@ -78,4 +83,5 @@ public class Settings {
     public void setVSync(boolean vSync) {
         bus.publish(new SettingsChangeVSyncEvent(this.vSync = vSync), HIGH);
     }
+
 }

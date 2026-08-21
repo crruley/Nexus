@@ -1,4 +1,4 @@
-package io.github.crruley.nexus.memory;
+package io.github.crruley.nexus.graphics;
 
 /**
  * A {@code VertexElement} is a characteristic of a vertex, commonly being a position, normal, or texture coordinate.
@@ -15,7 +15,7 @@ public class VertexElement {
     /**
      * The {@code DataType}.
      */
-    private DataType dataType;
+    private ShaderDataType shaderDataType;
 
     /**
      * Whether data should be normalized or converted directly as fixed-point values. If true, values are mapped to
@@ -33,12 +33,12 @@ public class VertexElement {
      * Constructs an {@code VertexElement}.
      *
      * @param name       the name.
-     * @param dataType   the {@code DataType}.
+     * @param shaderDataType   the {@code DataType}.
      * @param normalized whether data should be normalized or converted directly as fixed-point values.
      */
-    public VertexElement(String name, DataType dataType, boolean normalized) {
+    public VertexElement(String name, ShaderDataType shaderDataType, boolean normalized) {
         this.name = name;
-        this.dataType = dataType;
+        this.shaderDataType = shaderDataType;
         this.normalized = normalized;
     }
 
@@ -56,8 +56,8 @@ public class VertexElement {
      *
      * @return the {@code DataType}.
      */
-    public DataType getDataType() {
-        return dataType;
+    public ShaderDataType getDataType() {
+        return shaderDataType;
     }
 
     /**
