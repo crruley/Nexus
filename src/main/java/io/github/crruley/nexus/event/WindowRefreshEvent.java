@@ -4,26 +4,28 @@ import io.github.crruley.signal.core.Event;
 import io.github.crruley.nexus.core.Window;
 
 /**
- * A {@code WindowDestroyEvent} notifies subscribers when a {@code Window} refreshes.
+ * Notifies subscribers when a {@link Window} refreshes.
  *
  * @author Christopher Ruley
  */
 public class WindowRefreshEvent extends Event {
 
-    /**
-     * The {@code Window}.
-     */
     private final Window window;
 
     /**
      * Constructs a {@code WindowRefreshEvent}.
      *
-     * @param window the {@code Window}.
+     * @param window the {@link Window} this {@code WindowRefreshEvent} is derived from.
      */
     public WindowRefreshEvent(Window window) {
         this.window = window;
     }
 
+    /**
+     * Gets the {@link Window} this {@code WindowRefreshEvent} is derived from.
+     *
+     * @return the {@code Window} this {@code WindowRefreshEvent} is derived from.
+     */
     public Window getWindow() {
         return window;
     }

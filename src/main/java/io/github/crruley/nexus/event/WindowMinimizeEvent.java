@@ -4,26 +4,19 @@ import io.github.crruley.signal.core.Event;
 import io.github.crruley.nexus.core.Window;
 
 /**
- * A {@code WindowMinimizeEvent} notifies subscribers when a {@code Window} is minimized or restored.
+ * Notifies subscribers when a {@link Window} is minimized or restored.
  *
  * @author Christopher Ruley
  */
 public class WindowMinimizeEvent extends Event {
 
-    /**
-     * The {@code Window}.
-     */
     private final Window window;
-
-    /**
-     * Whether the {@code Window} was minimized or restored.
-     */
     private final boolean minimized;
 
     /**
-     * Constructs a {@code WindowMaximizeEvent}.
+     * Constructs a {@code WindowMinimizeEvent}.
      *
-     * @param window    the {@code Window}.
+     * @param window    the {@link Window} this {@code WindowMinimizeEvent} is derived from.
      * @param minimized whether the {@code Window} was minimized or restored.
      */
     public WindowMinimizeEvent(Window window, boolean minimized) {
@@ -31,10 +24,20 @@ public class WindowMinimizeEvent extends Event {
         this.minimized = minimized;
     }
 
+    /**
+     * Gets the {@link Window} this {@code WindowMinimizeEvent} is derived from.
+     *
+     * @return the {@code Window} this {@code WindowMinimizeEvent} is derived from.
+     */
     public Window getWindow() {
         return window;
     }
 
+    /**
+     * Whether the {@link Window} was minimized or restored.
+     *
+     * @return whether the {@code Window} was minimized or restored.
+     */
     public boolean isMinimized() {
         return minimized;
     }

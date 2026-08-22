@@ -4,31 +4,20 @@ import io.github.crruley.signal.core.Event;
 import io.github.crruley.nexus.core.Window;
 
 /**
- * A {@code WindowFocusEvent} notifies subscribers when a {@code Window} resizes.
+ * Notifies subscribers when a {@link Window} resizes.
  *
  * @author Christopher Ruley
  */
 public class WindowResizeEvent extends Event {
 
-    /**
-     * The {@code Window}.
-     */
     private final Window window;
-
-    /**
-     * The previous width.
-     */
     private final int previousWidth;
-
-    /**
-     * The previous height.
-     */
     private final int previousHeight;
 
     /**
      * Constructs a {@code WindowResizeEvent}.
      *
-     * @param window         the {@code Window}.
+     * @param window         the {@link Window} this {@code WindowResizeEvent} is derived from.
      * @param previousWidth  the width before resizing.
      * @param previousHeight the height before resizing.
      */
@@ -38,14 +27,29 @@ public class WindowResizeEvent extends Event {
         this.previousHeight = previousHeight;
     }
 
+    /**
+     * Gets the {@link Window} this {@code WindowResizeEvent} is derived from.
+     *
+     * @return the {@code Window} this {@code WindowResizeEvent} is derived from.
+     */
     public Window getWindow() {
         return window;
     }
 
+    /**
+     * Gets the width (in pixels) of the {@code Window} before resizing.
+     *
+     * @return the previous width (in pixels).
+     */
     public int getPreviousWidth() {
         return previousWidth;
     }
 
+    /**
+     * Gets the height (in pixels) of the {@code Window} before resizing.
+     *
+     * @return the previous height (in pixels).
+     */
     public int getPreviousHeight() {
         return previousHeight;
     }
