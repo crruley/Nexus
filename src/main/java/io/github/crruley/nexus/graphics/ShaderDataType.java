@@ -18,14 +18,7 @@ public enum ShaderDataType {
     FLOAT3(3, 12),
     FLOAT4(4, 16);
 
-    /**
-     * The number of components.
-     */
     private final int componentCount;
-
-    /**
-     * The size (in bytes), or the product of the component count and the corresponding bytes.
-     */
     private final int size;
 
     /**

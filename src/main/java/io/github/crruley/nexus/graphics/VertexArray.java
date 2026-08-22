@@ -4,31 +4,22 @@ import static org.lwjgl.opengl.GL20.*;
 import static org.lwjgl.opengl.GL30.*;
 
 /**
- * A {@code VertexArray} stores one or more {@code VertexBuffer}s (and optionally) an {@code IndexBuffer}.
+ * Represents the configuration of vertex data used for rendering.
+ * <p>
+ * A {@code VertexArray} associates one or more {@link VertexBuffer} instances and optionally an {@link IndexBuffer}.
  *
  * @author Christopher Ruley
  */
 public class VertexArray {
 
-    /**
-     * The {@code VertexBuffer} array.
-     */
-    private VertexBuffer[] vertexBuffers;
-
-    /**
-     * The unique identifier.
-     */
-    private int handle;
-
-    /**
-     * The (optional) {@code IndexBuffer}.
-     */
+    private final VertexBuffer[] vertexBuffers;
+    private final int handle;
     private IndexBuffer indexBuffer;
 
     /**
-     * Constructs a {@code VertexArray} and associates the provided {@code VertexBuffer}s.
+     * Constructs a {@code VertexArray} and associates the provided {@link VertexBuffer} instances.
      *
-     * @param vertexBuffers The {@code VertexBuffer}s.
+     * @param vertexBuffers the {@code VertexBuffer} instances.
      */
     public VertexArray(VertexBuffer... vertexBuffers) {
         this.vertexBuffers = vertexBuffers;
@@ -45,7 +36,7 @@ public class VertexArray {
             vertexBuffer.bind();
 
             for (var vertexElement : vertexElements) {
-                ShaderDataType shaderDataType = vertexElement.getDataType();
+                ShaderDataType shaderDataType = vertexElement.getShaderDataType();
 
                 glEnableVertexAttribArray(index);
                 glVertexAttribPointer(index, shaderDataType.getComponentCount(), shaderDataType.getOpenGLType(),
@@ -68,10 +59,18 @@ public class VertexArray {
     }
 
     /**
-     * Gets the (optional) {@code IndexBuffer}. This value is null if this {@code VertexArray} does not use an
-     * {@code IndexBuffer}.
+     * Gets the unique identification.
      *
-     * @return The (optional) {@code IndexBuffer}.
+     * @return the unique identification.
+     */
+    public long getHandle() {
+        return handle;
+    }
+
+    /**
+     * Gets the (optional) {@link IndexBuffer}. This value can be null
+     *
+     * @return the {@link IndexBuffer} if present or null if not.
      */
     public IndexBuffer getIndexBuffer() {
         return indexBuffer;
@@ -80,7 +79,7 @@ public class VertexArray {
     /**
      * Sets the {@code IndexBuffer}.
      *
-     * @param indexBuffer The {@code IndexBuffer}.
+     * @param indexBuffer the {@code IndexBuffer}.
      */
     public void setIndexBuffer(IndexBuffer indexBuffer) {
         this.indexBuffer = indexBuffer;
@@ -105,7 +104,8 @@ public class VertexArray {
     }
 
     /**
-     * Deletes this {@code VertexArray} and the associated {@code VertexBuffer}s (and {@code IndexBuffer}, if used).
+     * Deletes this {@code VertexArray} and the associated {@link VertexBuffer} instances (and {@link IndexBuffer},
+     * if used).
      */
     public void delete() {
         glDeleteVertexArrays(handle);

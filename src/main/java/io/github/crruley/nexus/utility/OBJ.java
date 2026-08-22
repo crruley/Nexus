@@ -2,8 +2,8 @@ package io.github.crruley.nexus.utility;
 
 import io.github.crruley.nexus.graphics.IndexBuffer;
 import io.github.crruley.nexus.graphics.Material;
+import io.github.crruley.nexus.graphics.SubMesh;
 import io.github.crruley.nexus.graphics.Mesh;
-import io.github.crruley.nexus.graphics.Model;
 import io.github.crruley.nexus.graphics.ShaderDataType;
 import io.github.crruley.nexus.graphics.VertexArray;
 import io.github.crruley.nexus.graphics.VertexBuffer;
@@ -48,7 +48,7 @@ public class OBJ {
     private OBJ() {
     }
 
-    public static Model open(String mtlPath, String objPath) {
+    public static Mesh open(String mtlPath, String objPath) {
         return parseOBJ(objPath, parseMTL(mtlPath));
     }
 
@@ -93,7 +93,7 @@ public class OBJ {
         return materials;
     }
 
-    private static Model parseOBJ(String objPath, List<Material> materials) {
+    private static Mesh parseOBJ(String objPath, List<Material> materials) {
         List<String> lines = readFile(objPath);
 
         List<Vector3> positions = new ArrayList<>();
@@ -108,7 +108,7 @@ public class OBJ {
         Map<String, Integer> vertexMap = new HashMap<>();
         int[] nextVertexIndex = new int[] { 0 };
 
-        List<Mesh> meshes = new ArrayList<>();
+        List<SubMesh> subMeshes = new ArrayList<>();
         String currentObjectName = "";
         Material currentMaterial = new Material();
         int currentIndexStart = 0;
@@ -126,7 +126,7 @@ public class OBJ {
 
             switch (tokens[0]) {
                 case OBJ_O -> {
-                    closeCurrentMesh(vertices, indices, meshes, currentObjectName, currentMaterial, currentIndexStart);
+                    closeCurrentMesh(vertices, indices, subMeshes, currentObjectName, currentMaterial, currentIndexStart);
 
                     currentObjectName = tokens[1];
                 }
@@ -142,7 +142,7 @@ public class OBJ {
                     hasNormals = true;
                 }
                 case OBJ_USEMTL -> {
-                    closeCurrentMesh(vertices, indices, meshes, currentObjectName, currentMaterial, currentIndexStart);
+                    closeCurrentMesh(vertices, indices, subMeshes, currentObjectName, currentMaterial, currentIndexStart);
 
                     for (var mat : materials) {
                         if (mat.getName().equals(tokens[1])) {
@@ -185,7 +185,7 @@ public class OBJ {
             }
         }
 
-        closeCurrentMesh(vertices, indices, meshes, currentObjectName, currentMaterial, currentIndexStart);
+        closeCurrentMesh(vertices, indices, subMeshes, currentObjectName, currentMaterial, currentIndexStart);
 
         // Build layout + buffers + model, same as before
         List<VertexElement> vertexElements = new ArrayList<>();
@@ -204,9 +204,9 @@ public class OBJ {
         IndexBuffer indexBuffer   = new IndexBuffer(indices.stream().mapToInt(i -> i).toArray());
         vertexArray.setIndexBuffer(indexBuffer);
 
-        Mesh[] meshArray = meshes.toArray(new Mesh[0]);
+        SubMesh[] subMeshArray = subMeshes.toArray(new SubMesh[0]);
 
-        return new Model(vertexArray, meshArray);
+        return new Mesh(vertexArray, subMeshArray);
     }
 
     private static int getOrCreateVertexIndex(int posIndex, int texIndex, int normIndex, boolean hasTexcoords,
@@ -238,12 +238,12 @@ public class OBJ {
         return newIndex;
     }
 
-    private static void closeCurrentMesh(List<Vector> vertices, List<Integer> indices, List<Mesh> meshes, String name, Material material,
+    private static void closeCurrentMesh(List<Vector> vertices, List<Integer> indices, List<SubMesh> subMeshes, String name, Material material,
                                          int indexStart) {
         int currentIndexCount = indices.size() - indexStart;
 
         if (currentIndexCount > 0) {
-            meshes.add(new Mesh(name, material, vertices.size(), currentIndexCount, indexStart));
+            subMeshes.add(new SubMesh(name, material, vertices.size(), currentIndexCount, indexStart));
         }
     }
 

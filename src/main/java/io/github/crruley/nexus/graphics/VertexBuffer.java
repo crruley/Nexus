@@ -7,32 +7,21 @@ import static io.github.crruley.nexus.utility.Memory.*;
 import static org.lwjgl.opengl.GL15.*;
 
 /**
- * A {@code VertexBuffer} stores vertex data and a {@code VertexLayout}.
+ * A {@code VertexBuffer} stores vertex data and a {@link VertexLayout}.
  *
  * @author Christopher Ruley
  */
 public class VertexBuffer {
 
-    /**
-     * The stored data.
-     */
     private float[] data;
-
-    /**
-     * The {@code VertexLayout}.
-     */
-    private VertexLayout vertexLayout;
-
-    /**
-     * The unique identification.
-     */
-    private int handle;
+    private final VertexLayout vertexLayout;
+    private final int handle;
 
     /**
      * Constructs a {@code VertexBuffer}.
      *
      * @param data         the data to store.
-     * @param vertexLayout the {@code VertexLayout}.
+     * @param vertexLayout the {@link VertexLayout}.
      */
     public VertexBuffer(float[] data, VertexLayout vertexLayout) {
         this.data = data;
@@ -47,7 +36,7 @@ public class VertexBuffer {
      * Constructs a {@code VertexBuffer}.
      *
      * @param data         the data to store.
-     * @param vertexLayout the {@code VertexLayout}.
+     * @param vertexLayout the {@link VertexLayout}.
      */
     public VertexBuffer(Vector[] data, VertexLayout vertexLayout) {
         this(getFromVectors(data), vertexLayout);
@@ -63,9 +52,9 @@ public class VertexBuffer {
     }
 
     /**
-     * Gets the {@code VertexLayout}.
+     * Gets the {@link VertexLayout}.
      *
-     * @return the {@code VertexLayout}.
+     * @return the {@link VertexLayout}.
      */
     public VertexLayout getVertexLayout() {
         return vertexLayout;

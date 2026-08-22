@@ -1,26 +1,23 @@
 package io.github.crruley.nexus.graphics;
 
 /**
- * A {@code VertexLayout} stores one or more {@code VertexElement}s to provide an interpretation of vertex data stored
- * in a {@code VertexBuffer}.
+ * Defines the layout of vertex data stored in a {@link VertexBuffer}.
+ * <p>
+ * A {@code VertexLayout} consists of one or more {@link VertexElement} instances that describe the attributes of each
+ * vertex.
  *
  * @author Christopher Ruley
  */
 public class VertexLayout {
 
-    /**
-     * The {@code VertexElement} array.
-     */
-    private VertexElement[] vertexElements;
-
-    /**
-     * The stride (in bytes), or the total of each {@code VertexElement}'s size.
-     */
+    private final VertexElement[] vertexElements;
     private int stride;
 
     /**
-     * Constructs an {@code VertexLayout} and calculates the offsets of each
-     * {@code VertexElement} and the stride.
+     * Constructs a {@code VertexLayout}.
+     * <p>
+     * The offset of each {@link VertexElement} and the stride of the layout are calculated according to the size of
+     * each element.
      *
      * @param vertexElements the {@code VertexElement} array.
      */
@@ -32,7 +29,7 @@ public class VertexLayout {
         for (var vertexElement : vertexElements) {
             vertexElement.offset = offset;
 
-            int size = vertexElement.getDataType().getSize();
+            int size = vertexElement.getShaderDataType().getSize();
 
             offset += size;
             stride += size;
@@ -49,8 +46,7 @@ public class VertexLayout {
     }
 
     /**
-     * Gets the stride (in bytes), or the total of each {@code VertexElement}'s
-     * size.
+     * Gets the stride (in bytes), or the total of each {@code VertexElement}'s size.
      *
      * @return the stride (in bytes).
      */

@@ -83,11 +83,11 @@ public class Renderer {
         shaderProgram.uploadUniform("lightPosition", light.getPosition());
         shaderProgram.uploadUniform("lightColor", light.getColor());
 
-        Model model = entity.getModel();
+        Mesh model = entity.getModel();
 
         model.bind();
 
-        for (var mesh : model.getMeshes()) {
+        for (var mesh : model.getSubMeshes()) {
             Material material = mesh.getMaterial();
             Texture texture = material.getTexture();
             boolean textured = texture != null;
@@ -116,7 +116,7 @@ public class Renderer {
     }
 
     public static void drawPoints(Window window, ShaderProgram shaderProgram,
-                                  Camera camera, Model model, float interpolation) {
+                                  Camera camera, Mesh model, float interpolation) {
         Transform cameraTransform = camera.getTransform();
 
         Vector3 interpolatedCameraPosition = new Vector3();
@@ -139,7 +139,7 @@ public class Renderer {
         shaderProgram.uploadUniform("projection", projection);
         model.bind();
 
-        for (var mesh : model.getMeshes()) {
+        for (var mesh : model.getSubMeshes()) {
             if (model.getVertexArray().getIndexBuffer() == null) {
                 glDrawArrays(GL_POINTS, 0, mesh.getVertexCount());
             } else {

@@ -3,40 +3,19 @@ package io.github.crruley.nexus.graphics;
 import io.github.crruley.nexus.math.Vector4;
 
 /**
- * A {@code Material}...
- * 
+ * Represents the visual properties of a surface used for rendering.
+ *
  * @author Christopher Ruley
  */
 public class Material {
 
-    /**
-     * The name.
-     */
     private String name;
-
-    /**
-     * The color that is reflected under ambient lighting.
-     */
     private Vector4 ambientColor;
-
-    /**
-     * The color of the surface under diffuse lighting.
-     */
     private Vector4 diffuseColor;
-
-    /**
-     * The color of the specular highlight on the surface.
-     */
     private Vector4 specularColor;
-
-    /**
-     * The scattering / radius of the specular highlight.
-     */
     private float shininess;
 
-    /**
-     * The (optional) {@code Texture}.
-     */
+    // This is optional and may be null.
     private Texture texture;
 
     /**
@@ -112,9 +91,9 @@ public class Material {
     }
 
     /**
-     * Gets the (optional) {@code Texture}. This value may be null.
+     * Gets the (optional) {@link Texture}. This value may be null.
      *
-     * @return the (optional) {@code Texture}.
+     * @return the (optional) {@link Texture}.
      */
     public Texture getTexture() {
         return texture;
@@ -166,9 +145,9 @@ public class Material {
     }
 
     /**
-     * Sets the (optional) {@code Texture}. This value may be null.
+     * Sets the (optional) {@link Texture}. This value may be null.
      *
-     * @param texture the (optional) {@code Texture}.
+     * @param texture the (optional) {@link Texture}.
      */
     public void setTexture(Texture texture) {
         this.texture = texture;

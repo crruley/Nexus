@@ -1,70 +1,56 @@
 package io.github.crruley.nexus.graphics;
 
 /**
+ * Represents a complete set of renderable geometry.
+ * <p>
+ * A {@code Mesh} owns the {@link VertexArray} which contains the vertex and index data and is divided into one or more
+ * {@link SubMesh} instances that define independently drawable regions of geometry.
+ *
  * @author Christopher Ruley
  */
 public class Mesh {
 
-    /**
-     * The name.
-     */
-    private final String name;
-
-    /**
-     * The {@code Material}.
-     */
-    private final Material material;
-
-    /**
-     * The total number of vertices.
-     */
-    private final int vertexCount;
-
-    /**
-     * The total number of indices.
-     */
-    private final int indexCount;
-
-    /**
-     * The starting position of the indices.
-     */
-    private final int indexOffset;
+    private final VertexArray vertexArray;
+    private final SubMesh[] subMeshes;
 
     /**
      * Constructs a {@code Mesh}.
      *
-     * @param name        the name.
-     * @param material    the {@code Material}.
-     * @param vertexCount the total number of vertices.
-     * @param indexCount  the total number of indices.
-     * @param indexOffset the starting position of the indices.
+     * @param vertexArray the {@link VertexArray}.
+     * @param subMeshes   the array of {@link SubMesh} instances.
      */
-    public Mesh(String name, Material material, int vertexCount, int indexCount, int indexOffset) {
-        this.name = name;
-        this.material = material;
-        this.vertexCount = vertexCount;
-        this.indexCount = indexCount;
-        this.indexOffset = indexOffset;
+    public Mesh(VertexArray vertexArray, SubMesh[] subMeshes) {
+        this.vertexArray = vertexArray;
+        this.subMeshes = subMeshes;
     }
 
-    public String getName() {
-        return name;
+    public VertexArray getVertexArray() {
+        return vertexArray;
     }
 
-    public Material getMaterial() {
-        return material;
+    public SubMesh[] getSubMeshes() {
+        return subMeshes;
     }
 
-    public int getVertexCount() {
-        return vertexCount;
+    /**
+     * Binds this {@code Mesh}.
+     */
+    public void bind() {
+        vertexArray.bind();
     }
 
-    public int getIndexCount() {
-        return indexCount;
+    /**
+     * Unbinds this {@code Mesh}.
+     */
+    public void unbind() {
+        vertexArray.unbind();
     }
 
-    public int getIndexOffset() {
-        return indexOffset;
+    /**
+     * Deletes this {@code Mesh} by releasing its resources.
+     */
+    public void delete() {
+        vertexArray.delete();
     }
 
 }

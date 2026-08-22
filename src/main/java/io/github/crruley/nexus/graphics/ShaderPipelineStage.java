@@ -3,7 +3,10 @@ package io.github.crruley.nexus.graphics;
 import static org.lwjgl.opengl.GL43.*;
 
 /**
- * {@code PipelineStage} defines the rendering pipeline stages.
+ * Represents a programmable stage of the shader pipeline.
+ * <p>
+ * Each {@code ShaderPipelineStage} corresponds to an OpenGL shader type used when creating and compiling a
+ * {@link Shader}.
  *
  * @author Christopher Ruley
  */
@@ -17,7 +20,7 @@ public enum ShaderPipelineStage {
     COMPUTE;
 
     /**
-     * Gets the OpenGL type corresponding with this {@code PipelineStage}.
+     * Gets the OpenGL type corresponding with this {@code ShaderPipelineStage}.
      *
      * @return the OpenGL type.
      */

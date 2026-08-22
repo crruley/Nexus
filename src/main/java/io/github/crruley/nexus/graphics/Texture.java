@@ -6,12 +6,24 @@ import static io.github.crruley.nexus.utility.Documents.*;
 import static io.github.crruley.nexus.utility.Memory.*;
 import static org.lwjgl.opengl.GL11.*;
 
+/**
+ * Represents a two-dimensional texture used for rendering.
+ * <p>
+ * A {@code Texture} loads image data from a file and stores it as an OpenGL texture.
+ *
+ * @author Christopher Ruley
+ */
 public class Texture {
 
-    private int width;
-    private int height;
-    private int handle;
+    private final int width;
+    private final int height;
+    private final int handle;
 
+    /**
+     * Construxts a {@code Texture} from the image at the specified path.
+     *
+     * @param path the path of the image file.
+     */
     public Texture(String path) {
         BufferedImage bufferedImage = readImage(path);
 
@@ -46,26 +58,50 @@ public class Texture {
         unbind();
     }
 
+    /**
+     * Gets the width, in pixels.
+     *
+     * @return the width, in pixels.
+     */
     public int getWidth() {
         return width;
     }
 
+    /**
+     * Gets the height, in pixels.
+     *
+     * @return the height, in pixels.
+     */
     public int getHeight() {
         return height;
     }
 
+    /**
+     * Gets the unique identification.
+     *
+     * @return the unique identification.
+     */
     public int getHandle() {
         return handle;
     }
 
+    /**
+     * Binds this {@code Texture}.
+     */
     public void bind() {
         glBindTexture(GL_TEXTURE_2D, handle);
     }
 
+    /**
+     * Unbinds this {@code Texture}.
+     */
     public void unbind() {
         glBindTexture(GL_TEXTURE_2D, 0);
     }
 
+    /**
+     * Deletes this {@code Texture}.
+     */
     public void delete() {
         glDeleteTextures(handle);
     }

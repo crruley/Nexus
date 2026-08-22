@@ -10,26 +10,15 @@ import static org.lwjgl.opengl.GL20.*;
  */
 public class Shader {
 
-    /**
-     * The {@code PipelineStage}.
-     */
-    private ShaderPipelineStage shaderPipelineStage;
-
-    /**
-     * The source code.
-     */
-    private String sourceCode;
-
-    /**
-     * The unique identification.
-     */
-    private int handle;
+    private final ShaderPipelineStage shaderPipelineStage;
+    private final String sourceCode;
+    private final int handle;
 
     /**
      * Constructs a {@code Shader}.
      *
-     * @param shaderPipelineStage the {@code PipelineStage}.
-     * @param sourceCode    the source code.
+     * @param shaderPipelineStage the {@link ShaderPipelineStage}.
+     * @param sourceCode          the source code.
      */
     public Shader(ShaderPipelineStage shaderPipelineStage, String sourceCode) {
         this.shaderPipelineStage = shaderPipelineStage;
@@ -49,7 +38,7 @@ public class Shader {
     }
 
     /**
-     * Gets the {@code PipelineStage}.
+     * Gets the {@link ShaderPipelineStage}.
      */
     public ShaderPipelineStage getPipelineStage() {
         return shaderPipelineStage;

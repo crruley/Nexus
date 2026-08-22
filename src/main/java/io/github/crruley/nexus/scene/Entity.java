@@ -1,27 +1,31 @@
 package io.github.crruley.nexus.scene;
 
-import io.github.crruley.nexus.graphics.Model;
+import io.github.crruley.nexus.graphics.Mesh;
 
 public class Entity {
 
-    private Model model;
+    private Mesh mesh;
     private Transform transform;
 
-    public Entity(Model model, Transform transform) {
-        this.model = model;
+    public Entity(Mesh mesh, Transform transform) {
+        this.mesh = mesh;
         this.transform = transform;
     }
 
-    public Model getModel() {
-        return model;
+    public Mesh getModel() {
+        return mesh;
     }
 
     public Transform getTransform() {
         return transform;
     }
 
-    public void setModel(Model model) {
-        this.model = model;
+    public void setMesh(Mesh mesh) {
+        this.mesh = mesh;
+    }
+
+    public void setTransform(Transform transform) {
+        this.transform = transform;
     }
 
     public void update() {
@@ -29,7 +33,7 @@ public class Entity {
     }
 
     public void delete() {
-        model.delete();
+        mesh.delete();
     }
 
 }

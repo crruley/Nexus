@@ -10,20 +10,9 @@ import static org.lwjgl.opengl.GL15.*;
  */
 public class IndexBuffer {
 
-    /**
-     * The stored indices.
-     */
-    private int[] indices;
-
-    /**
-     * The number of indices.
-     */
-    private int count;
-
-    /**
-     * The unique identification.
-     */
-    private int handle;
+    private final int[] indices;
+    private final int count;
+    private final int handle;
 
     /**
      * Constructs an {@code IndexBuffer}.

@@ -24,19 +24,8 @@ import static org.lwjgl.opengl.GL20.*;
  */
 public class ShaderProgram {
 
-    /**
-     * The {@code Shader} array.
-     */
     private Shader[] shaders;
-
-    /**
-     * The unique identification.
-     */
     private int handle;
-
-    /**
-     * The map used to cache uniform locations for quick retrieval.
-     */
     private Map<String, Integer> uniformLocations;
 
     /**

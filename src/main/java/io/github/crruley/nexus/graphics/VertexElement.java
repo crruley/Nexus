@@ -1,40 +1,25 @@
 package io.github.crruley.nexus.graphics;
 
 /**
- * A {@code VertexElement} is a characteristic of a vertex, commonly being a position, normal, or texture coordinate.
+ * Represents an attribute for a vertex, such as a position, normal, or texture coordinate.
  *
  * @author Christopher Ruley
  */
 public class VertexElement {
 
-    /**
-     * The name.
-     */
-    private String name;
+    private final String name;
+    private final ShaderDataType shaderDataType;
+    private final boolean normalized;
 
-    /**
-     * The {@code DataType}.
-     */
-    private ShaderDataType shaderDataType;
-
-    /**
-     * Whether data should be normalized or converted directly as fixed-point values. If true, values are mapped to
-     * the range [-1, 1] (for signed values) or [0, 1] (for unsigned values) when accessed and converted to floating
-     * points.
-     */
-    private boolean normalized;
-
-    /**
-     * The offset (in bytes), or displacement. This value is calculated during the creation of the {@code VertexLayout}.
-     */
+    // This is calculated later.
     int offset;
 
     /**
      * Constructs an {@code VertexElement}.
      *
-     * @param name       the name.
-     * @param shaderDataType   the {@code DataType}.
-     * @param normalized whether data should be normalized or converted directly as fixed-point values.
+     * @param name           the name.
+     * @param shaderDataType the {@link ShaderDataType}.
+     * @param normalized     whether data should be normalized or converted directly as fixed-point values.
      */
     public VertexElement(String name, ShaderDataType shaderDataType, boolean normalized) {
         this.name = name;
@@ -43,20 +28,16 @@ public class VertexElement {
     }
 
     /**
-     * Gets the name.
-     *
-     * @return the name.
+     * The name.
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Gets the {@code DataType}.
-     *
-     * @return the {@code DataType}.
+     * The {@link ShaderDataType}.
      */
-    public ShaderDataType getDataType() {
+    public ShaderDataType getShaderDataType() {
         return shaderDataType;
     }
 
@@ -73,7 +54,7 @@ public class VertexElement {
 
     /**
      * Gets the offset (in bytes), or displacement. This value is calculated during the creation of the
-     * {@code VertexLayout}.
+     * {@link VertexLayout}.
      *
      * @return the offset (in bytes).
      */
