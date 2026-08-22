@@ -4,7 +4,7 @@ package io.github.crruley.nexus.graphics;
  * Represents an independently drawable region of a {@link Mesh}.
  * <p>
  * A {@code SubMesh} defines the range of vertex data, index data (if applicable), and the {@link Material} used when
- * rendering that region. It does not own the underlying geometry.
+ * rendering that region. It does not contain the underlying geometry.
  *
  * @author Christopher Ruley
  */
